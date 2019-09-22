@@ -11,11 +11,14 @@
 		<module>logging-api</module>
 		<module>logging-server</module>
 		<module>logging-client</module>
+		<module>logging-kafka</module>
 	</modules>
 	<properties>
-		<apache.thrift.version>0.12.0</apache.thrift.version>
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
+
+		<apache.thrift.version>0.12.0</apache.thrift.version>
+		<org.slf4j.version>1.7.28</org.slf4j.version>
 	</properties>
 	<dependencyManagement>
 		<dependencies>
@@ -23,6 +26,11 @@
 				<groupId>org.apache.thrift</groupId>
 				<artifactId>libthrift</artifactId>
 				<version>${apache.thrift.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>org.slf4j</groupId>
+				<artifactId>slf4j-simple</artifactId>
+				<version>${org.slf4j.version}</version>
 			</dependency>
 		</dependencies>
 	</dependencyManagement>

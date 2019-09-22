@@ -12,12 +12,12 @@ import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
 
-import com.pl.assignment.LogEvent;
-import com.pl.assignment.Logger;
+import com.pf.assignment.LogEvent;
+import com.pf.assignment.LoggingService;
 
 public class LoggingClient {
 
-	private static Logger.Client client;
+	private static LoggingService.Client client;
 	private static TTransport transport;
 	private static final String DATE_PATTERN = "dd-MM-yyyy HH:ss";
 
@@ -25,7 +25,7 @@ public class LoggingClient {
 		try {
 			transport = new TSocket("localhost", 9090);
 			TProtocol protocol = new TBinaryProtocol(transport);
-			client = new Logger.Client(protocol);
+			client = new LoggingService.Client(protocol);
 			transport.open();
 		} catch (TTransportException e) {
 			e.printStackTrace();
@@ -41,7 +41,8 @@ public class LoggingClient {
 	private LogEvent generateRandomLogEvent() {
 		LogEvent le = new LogEvent();
 		String date = new SimpleDateFormat(DATE_PATTERN).format(new Date());
-		com.pl.assignment.Date d = new com.pl.assignment.Date(date, DATE_PATTERN);
+		com.pf.assignment.Date d = new com.pf.assignment.Date(date, DATE_PATTERN);
+		le.setApplication("application_1");
 		le.setDate(d);
 		le.setUuid(UUID.randomUUID().toString());
 		le.setMessage(MessageFormat.format("LogEvent created on {0}", date));

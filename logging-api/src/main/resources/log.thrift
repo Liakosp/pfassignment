@@ -1,4 +1,4 @@
-namespace java com.pl.assignment
+namespace java com.pf.assignment
 
 /**
  * We define a Date struct to represnt the time of the logging evenr.
@@ -16,12 +16,13 @@ struct Date {
  */
 struct LogEvent {
 	1: i16 version = 1,
-	2: string uuid,
-	3: Date date,
-	4: string message
+	2: string application,
+	3: string uuid,
+	4: Date date,
+	5: string message
 }
 
-service Logger {
+service LoggingService {
 	/**
 	* We define a single oneway method so that the client can send the LogEvent
 	* to the server whithout having to listen for a response, since it seems irrelevant 

@@ -7,14 +7,14 @@ import org.apache.thrift.transport.TServerSocket;
 import org.apache.thrift.transport.TServerTransport;
 import org.apache.thrift.transport.TTransportException;
 
-import com.pl.assignment.Logger;
+import com.pf.assignment.LoggingService;
 
-public class LoggerServer {
+public class LoggingServer {
 
-	public static void main(String [] args) {
+	public static void main(String[] args) {
 		try {
-			LoggerHandler handler = new LoggerHandler();
-			Logger.Processor<LoggerHandler> processor = new Logger.Processor<LoggerHandler>(handler);
+			LoggingHandler handler = new LoggingHandler();
+			LoggingService.Processor<LoggingHandler> processor = new LoggingService.Processor<LoggingHandler>(handler);
 			TServerTransport serverTransport = new TServerSocket(9090);
 			TServer server = new TSimpleServer(new Args(serverTransport).processor(processor));
 			System.out.println("Starting the simple server...");
@@ -23,6 +23,6 @@ public class LoggerServer {
 			System.out.println("Error occured: " + e.getMessage());
 			e.printStackTrace();
 		}
-		
+
 	}
 }

@@ -1,0 +1,36 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>com.pf.assignment</groupId>
+		<artifactId>parent</artifactId>
+		<version>1.0.0-SNAPSHOT</version>
+	</parent>
+	<artifactId>logging-kafka</artifactId>
+	<packaging>pom</packaging>
+	<modules>
+		<module>logging-kafka-producer</module>
+		<module>logging-kafka-common</module>
+	</modules>
+
+	<properties>
+		<apache.kafka.version>2.3.0</apache.kafka.version>
+		<com.jackson.databind.version>2.9.9.3</com.jackson.databind.version>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>org.apache.kafka</groupId>
+				<artifactId>kafka-clients</artifactId>
+				<version>${apache.kafka.version}</version>
+			</dependency>
+			<dependency>
+				<groupId>com.fasterxml.jackson.core</groupId>
+				<artifactId>jackson-databind</artifactId>
+				<version>${com.jackson.databind.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+</project>
