@@ -11,17 +11,22 @@ import org.apache.thrift.protocol.TProtocol;
 import org.apache.thrift.transport.TSocket;
 import org.apache.thrift.transport.TTransport;
 import org.apache.thrift.transport.TTransportException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.pf.assignment.LogEvent;
+import com.pf.assignment.LogEventDate;
 import com.pf.assignment.LoggingService;
 
 public class LoggingClient {
 
+	private static Logger logger = LoggerFactory.getLogger(LoggingTimerTask.class);
 	private static LoggingService.Client client;
 	private static TTransport transport;
 	private static final String DATE_PATTERN = "dd-MM-yyyy HH:ss";
 
 	public LoggingClient() {
+		logger.info("Initialising thrift client..");
 		try {
 			transport = new TSocket("localhost", 9090);
 			TProtocol protocol = new TBinaryProtocol(transport);
@@ -34,14 +39,16 @@ public class LoggingClient {
 	}
 
 	public void sendLog() throws TException {
-		System.out.println("About to send log event");
-		client.send_log(generateRandomLogEvent());
+		LogEvent le = generateRandomLogEvent();
+		logger.info(MessageFormat.format("About to send log event with id: {0}", le.getUuid()));
+		client.send_log(le);
 	}
 
 	private LogEvent generateRandomLogEvent() {
+		logger.info("Generating new random log event");
 		LogEvent le = new LogEvent();
 		String date = new SimpleDateFormat(DATE_PATTERN).format(new Date());
-		com.pf.assignment.Date d = new com.pf.assignment.Date(date, DATE_PATTERN);
+		LogEventDate d = new LogEventDate(date, DATE_PATTERN);
 		le.setApplication("application_1");
 		le.setDate(d);
 		le.setUuid(UUID.randomUUID().toString());

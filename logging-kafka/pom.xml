@@ -12,6 +12,7 @@
 	<modules>
 		<module>logging-kafka-producer</module>
 		<module>logging-kafka-common</module>
+		<module>logging-kafka-consumer</module>
 	</modules>
 
 	<properties>

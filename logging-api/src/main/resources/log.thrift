@@ -6,8 +6,8 @@ namespace java com.pf.assignment
  * by using the pattern provided without any additional information or convention
  * between the client and the server applications.
  */
-struct Date {
-	1: string date,
+struct LogEventDate {
+	1: string dateString,
 	2: string pattern
 }
 
@@ -18,7 +18,7 @@ struct LogEvent {
 	1: i16 version = 1,
 	2: string application,
 	3: string uuid,
-	4: Date date,
+	4: LogEventDate date,
 	5: string message
 }
 
