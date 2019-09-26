@@ -23,7 +23,7 @@ public class LoggingClient {
 	private static Logger logger = LoggerFactory.getLogger(LoggingTimerTask.class);
 	private static LoggingService.Client client;
 	private static TTransport transport;
-	private static final String DATE_PATTERN = "dd-MM-yyyy HH:ss";
+	private static final String DATE_PATTERN = "dd-MM-yyyy HH:mm:ss";
 
 	public LoggingClient() {
 		logger.info("Initialising thrift client..");

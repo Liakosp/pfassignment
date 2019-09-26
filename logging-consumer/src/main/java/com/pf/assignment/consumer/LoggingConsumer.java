@@ -11,6 +11,8 @@ import org.apache.kafka.common.serialization.StringDeserializer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.pf.assignment.cassandra.CassandraConnector;
+import com.pf.assignment.cassandra.repository.LogEventRepository;
 import com.pf.assignment.kafka.consumer.LogEventKafkaConsumer;
 import com.pf.assignment.kafka.deserializer.KafkaJsonDeserializer;
 import com.pf.assignment.model.dto.LogEventDto;
@@ -18,6 +20,9 @@ import com.pf.assignment.model.dto.LogEventDto;
 public class LoggingConsumer {
 	
 	private static Logger logger = LoggerFactory.getLogger(LoggingConsumer.class);
+	
+	private static final String CASSANDRA_HOST = "127.0.0.1";
+	private static Integer CASSANDRA_PORT = 9042;
 	
 	public static void main(String[] args) {
 		logger.info("Starting logging consumer application..");
@@ -54,10 +59,14 @@ public class LoggingConsumer {
 		private Logger threadLogger = LoggerFactory.getLogger(ConsumerRunnable.class);
 		private CountDownLatch latch;
 		private LogEventKafkaConsumer<String, LogEventDto> consumer;
+		private CassandraConnector cassandraConnector;
+		private LogEventRepository logEventRepo;
 		
 		public ConsumerRunnable(CountDownLatch latch) {
 			this.latch = latch;
 			consumer = new LogEventKafkaConsumer<String, LogEventDto>(new StringDeserializer(), new KafkaJsonDeserializer<LogEventDto>(LogEventDto.class));
+			this.cassandraConnector = new CassandraConnector(CASSANDRA_HOST, CASSANDRA_PORT);
+			logEventRepo = new LogEventRepository(cassandraConnector.getSession());
 		}
 		
 		@Override
@@ -69,8 +78,8 @@ public class LoggingConsumer {
 					threadLogger.info(MessageFormat.format("Consumed {0} records", consumerRecords.count()));
 					
 					for (ConsumerRecord<String, LogEventDto> record : consumerRecords) {
-						threadLogger.info(MessageFormat.format("Consumed LogEvent record with uuid {0} and offset {1}", 
-								record.value().getUuid(), record.offset()));
+						threadLogger.info(MessageFormat.format("Consumed LogEvent record with uuid {0} and offset {1}", record.value().getUuid(), record.offset()));
+						logEventRepo.insertLogEvent(record.value(), record.offset());
 					}
 					
 				}
@@ -80,6 +89,7 @@ public class LoggingConsumer {
 				threadLogger.error("Error occured while polling", e);
 			}finally {
 				consumer.close();
+				cassandraConnector.close();
 				latch.countDown();
 			}
 		}

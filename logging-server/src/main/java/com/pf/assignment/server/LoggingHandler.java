@@ -12,7 +12,7 @@ import com.pf.assignment.LoggingService.Iface;
 import com.pf.assignment.kafka.producer.LogEventKafkaProducer;
 import com.pf.assignment.kafka.serializer.KafkaJsonSerializer;
 import com.pf.assignment.model.dto.LogEventDto;
-import com.pf.assignment.model.mapper.LogEventMapper;
+import com.pf.assignment.model.mapper.LogEventDtoMapper;
 
 public class LoggingHandler implements Iface {
 
@@ -25,7 +25,7 @@ public class LoggingHandler implements Iface {
 	
 	public void log(LogEvent l) throws TException { 
 		logger.info(MessageFormat.format("Received log event with id: {0}", l.getUuid()));
-		kafkaProducer.send(l.getApplication(), LogEventMapper.apply(l));
+		kafkaProducer.send(l.getApplication(), LogEventDtoMapper.apply(l));
 	}
 	
 	public void close() {
