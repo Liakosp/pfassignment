@@ -3,7 +3,7 @@ package com.pf.assignment.model.mapper;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 
-import com.pf.assignment.LogEvent;
+import com.pf.assignment.api.LogEvent;
 import com.pf.assignment.model.dto.LogEventDto;
 
 public class LogEventDtoMapper {

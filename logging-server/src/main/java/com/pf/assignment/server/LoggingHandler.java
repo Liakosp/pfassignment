@@ -7,8 +7,8 @@ import org.apache.thrift.TException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.pf.assignment.LogEvent;
-import com.pf.assignment.LoggingService.Iface;
+import com.pf.assignment.api.LogEvent;
+import com.pf.assignment.api.LoggingService.Iface;
 import com.pf.assignment.kafka.producer.LogEventKafkaProducer;
 import com.pf.assignment.kafka.serializer.KafkaJsonSerializer;
 import com.pf.assignment.model.dto.LogEventDto;

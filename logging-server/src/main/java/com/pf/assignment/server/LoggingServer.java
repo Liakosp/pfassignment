@@ -12,7 +12,7 @@ import org.apache.thrift.transport.TTransportException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.pf.assignment.LoggingService;
+import com.pf.assignment.api.LoggingService;
 
 public class LoggingServer {
 
