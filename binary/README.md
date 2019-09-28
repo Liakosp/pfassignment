@@ -17,6 +17,8 @@ Example usage:
 ## Starting applications
 From the binary directory simply run the following commands:
 > ./start-consumer.sh
+
 > ./start-server.sh
+
 > ./start-client.sh
 
