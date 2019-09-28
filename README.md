@@ -20,7 +20,7 @@ In the context of this implementation a **LogEvent** is defined by the following
 
 The **LogEventDate** consists the following fields
 |Field|Description|
-|-|-|
+|-----|-----------|
 |dateString|The string representation of the date|
 |pattern|The date format pattern that was used by the client to format the date and will be used by the server to parse it|
 
