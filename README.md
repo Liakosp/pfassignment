@@ -19,6 +19,7 @@ In the context of this implementation a **LogEvent** is defined by the following
 |message|The LogEvent message|
 
 The **LogEventDate** consists the following fields
+
 |Field|Description|
 |-----|-----------|
 |dateString|The string representation of the date|
