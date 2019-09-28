@@ -49,23 +49,5 @@ The thrift server is located in the maven module **logging-server** and the fina
 The kafka consumer is located in the maven module **logging-consumer** and the final executabe jar can be found in
 >logging-consumer\target\logging-consumer-app.jar
 
-Installation instruction for both Kafka and Cassandra can be found online their respcetive webpages.
-
-For the entire system to run we will need:
-Zookeeper running: zookeeper-server-start.bat config\zookeeper.properties (the only changed property was datadir)
-Kafka running: kafka-server-start.bat config\server.properties (the only changed property was log.dirs)
-
-Create a topic for the kafka producer and consumer to use with the following command:
-kafka-topics --zookeeper 127.0.0.1:2181 --topic logging_topic --create --partitions 3 --replication-factor 1
-
-//cassandra up and running:
-//cassandra schema information:
-
-And the final step is to actually execute the modules of the system:
-java -jar logging-consumer\target\logging-consumer-app.jar
-java -jar logging-server\target\logging-server-app.jar
-java -jar logging-client\target\logging-client-app.jar
-
-We should now see from the logs of the application that the client created and sends LogEvents to the server that maps them to a LogEventDto pojo (the serialisation to JSON what having problem with the generated LogEvent class from thrift) 
-and procudes a message in the afformantioned kafka topic. Finaly the consumer picks up that message and stores it in Cassandra.
-
+## Binary execution
+Please go to the *binary* directory and follow the instructions in the README file there in order to set upd the environment and execute the applications.
