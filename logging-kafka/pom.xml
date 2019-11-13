@@ -17,7 +17,7 @@
 
 	<properties>
 		<apache.kafka.version>2.3.0</apache.kafka.version>
-		<com.jackson.databind.version>2.9.9.3</com.jackson.databind.version>
+		<com.jackson.databind.version>2.9.10.1</com.jackson.databind.version>
 	</properties>
 
 	<dependencyManagement>
